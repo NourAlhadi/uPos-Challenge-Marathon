@@ -28,6 +28,19 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <style>
+
+        .content-holder{
+            color:black;
+        }
+
+        .side-nav *:hover {
+            background-color: #8e44ad;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -44,15 +57,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">uPos</a>
+            <a class="navbar-brand" href="<?php echo base_url();?>">uPos</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
+
+            <?php if($user->role > 0): ?>
+                <li>
+                    <a href="<?php echo base_url();?>dashboard/add_product"><i class="fa fa-plus-circle"></i> Add Product</a>
+                </li>
+            <?php endif; ?>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $user->fullname; ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="<?php echo base_url(); ?>dashboard/shopping_list"><i class="fa fa-shopping-cart" style="font-size: 17px; width: 24px"></i>Shopping List</a>
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -60,13 +79,19 @@
                     </li>
                 </ul>
             </li>
+
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa-user"></i> Profile</a>
+                <?php if(!isset($tag_active)):?>
+                    <li class="active">
+                <?php else: ?>
+                    <li>
+                <?php endif; ?>
+                    <a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa fa-shopping-cart"></i> Products list</a>
                 </li>
+
 
             </ul>
         </div>
@@ -75,12 +100,13 @@
 
     <div id="page-wrapper">
 
-        <div class="container-fluid">
+        <div class="container-fluid"  style="min-height: 500px">
             <div class="row">
-                <div class="col-sm-12" style="min-height: 500px">
-                    <h1 class="alert alert-info"> Welcome to uPos challenge #1 </h1>
+                <div class="col-sm-12">
+                    <h4 class="alert alert-info"> This is a minimized version: each and every element (Views, Models, etc..) Are Minimized to simply just achieve the goal of the challenge no less no more, it could be much more bigger and better if needed!! </h4>
                 </div>
             </div>
+            <?=$body?>
         </div>
         <!-- /.container-fluid -->
 

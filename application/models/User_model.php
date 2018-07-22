@@ -175,4 +175,16 @@ class user_model extends CI_Model {
         unset($_SESSION['user_id']);
     }
 
+
+    public function is_admin($user_id){
+        $query = $this->db->where('id',$user_id)->get('user');
+
+        if ($query == null) return false;
+
+        $user = $query->row();
+        if ($user->role < 1) return false;
+
+        return true;
+    }
+
 }

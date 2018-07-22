@@ -9,6 +9,8 @@ application/logs/*
 !application/*/.htaccess
 
 application/sessions/*
+uploads/*
+uploads/products/*
 
 composer.lock
 
