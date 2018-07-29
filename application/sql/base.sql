@@ -54,3 +54,17 @@ CREATE TABLE `user_product` (
     `product_id` INT NOT NULL,
     `items` INT NOT NULL
 ) ENGINE = InnoDB;
+
+
+DROP TABLE IF EXISTS `messages`
+#
+# Table Structure for table Messages
+#
+CREATE TABLE `messages` (
+    `msg_id` INT NOT NULL,
+    `user_id` INT NOT NULL,
+    `date` DATETIME NOT NULL,
+    `message` TEXT NOT NULL,
+    `by_user` TINYINT NOT NULL,
+    PRIMARY KEY (`msg_id`)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;

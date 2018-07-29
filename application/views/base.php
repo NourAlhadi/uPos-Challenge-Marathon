@@ -41,6 +41,13 @@
 
     </style>
 
+    <!-- jQuery -->
+    <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+
+
 </head>
 
 <body>
@@ -91,8 +98,19 @@
                 <?php endif; ?>
                     <a href="<?php echo base_url(); ?>"><i class="fa fa-fw fa fa-shopping-cart"></i> Products list</a>
                 </li>
+                <?php if (isset($tag_active) && $tag_active == 'chat'): ?>
+                    <li class="active">
+                <?php else: ?>
+                    <li>
+                <?php endif; ?>
 
+                    <?php if($user->role <= 0): ?>
+                        <a href="<?php echo base_url(); ?>dashboard/chat"><i class="fa fa-fw fa-comments"></i> User/Admin Talks</a>
+                    <?php else: ?>
+                        <a href="<?php echo base_url(); ?>dashboard/talks"><i class="fa fa-fw fa-comments"></i> User/Admin Talks</a>
+                    <?php endif; ?>
 
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -101,11 +119,6 @@
     <div id="page-wrapper">
 
         <div class="container-fluid"  style="min-height: 500px">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h4 class="alert alert-info"> This is a minimized version: each and every element (Views, Models, etc..) Are Minimized to simply just achieve the goal of the challenge no less no more, it could be much more bigger and better if needed!! </h4>
-                </div>
-            </div>
             <?=$body?>
         </div>
         <!-- /.container-fluid -->
@@ -116,11 +129,6 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
 
 </body>

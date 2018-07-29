@@ -186,4 +186,78 @@ class Dashboard extends CI_Controller {
         $this->user_product_model->remove_from_cart($uid,$pid,$cnt);
         redirect('dashboard/shopping_list','refresh');
     }
+
+
+    public function chat($user_id = null){
+        $active = $this->user_model->get_active_user();
+        $user = $this->user_model->get_user_by_id($active)->row();
+        $data['user'] = $user;
+
+        if ($user_id == null){
+            $user_id = $active;
+        }
+
+        $data['thread_id'] = $user_id;
+        $data['tag_active'] = "chat";
+        $data['body'] = $this->load->view('chat',$data,true);
+
+        $this->load->view('base',$data);
+    }
+
+    public function send_message(){
+
+        $data = array(
+            'date' => date('Y-m-d H:i:00'),
+            'user_id' => $this->input->post('thread'),
+            'by_user' => ($this->input->post('sender') == $this->input->post('thread') ? 1 : 0),
+            'message' => $this->input->post('message'),
+        );
+
+        $this->messages_model->add_message($data);
+    }
+
+    public function get_messages(){
+        $user_id = $this->input->post('thread');
+        $last_ms = $this->input->post('last');
+
+        $messages = $this->messages_model->get_messages($user_id,$last_ms);
+
+        echo json_encode($messages);
+    }
+
+    public function talks(){
+        $active = $this->user_model->get_active_user();
+        $user = $this->user_model->get_user_by_id($active)->row();
+        $data['user'] = $user;
+
+        $data['tag_active'] = "chat";
+
+        $threads = $this->messages_model->get_talks();
+        $data['users'] = array();
+
+        foreach ($threads as $thread){
+            $user = $this->user_model->get_user_by_id($thread->user_id)->row();
+            array_push($data['users'],$user);
+        }
+
+        $data['body'] = $this->load->view('view_talks',$data,true);
+
+        $this->load->view('base',$data);
+    }
+
+    public function talk($user_id = null){
+        $active = $this->user_model->get_active_user();
+        $user = $this->user_model->get_user_by_id($active)->row();
+        $data['user'] = $user;
+
+        if ($user_id == null){
+            $user_id = $active;
+        }
+
+        $data['thread_id'] = $user_id;
+        $data['tag_active'] = "chat";
+        $data['body'] = $this->load->view('chat',$data,true);
+
+        $this->load->view('base',$data);
+    }
 }

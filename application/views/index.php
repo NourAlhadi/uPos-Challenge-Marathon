@@ -1,3 +1,9 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="alert alert-info"> This is a minimized version: each and every element (Views, Models, etc..) Are Minimized to simply just achieve the goal of the challenge no less no more, it could be much more bigger and better if needed!! </h4>
+    </div>
+</div>
+
 <?php foreach ($products as $item): ?>
 
     <div class="row">
@@ -23,8 +29,13 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <a class="btn btn-primary" href="<?php echo base_url();?>dashboard/add_to_cart/<?php echo $item->id; ?>">Add to cart</a>
-                    <span class="alert alert-info">Each addition is considered as a re-buy operation!!</span>
+                    <div class="row">
+                        <span class="col-xs-2">
+                            <a class="btn btn-primary" href="<?php echo base_url();?>dashboard/add_to_cart/<?php echo $item->id; ?>">Add to cart</a>
+                        </span>
+                        <span class="col-xs-5 alert alert-info">Each addition is considered as a re-buy operation!!</span>
+                        <span class="col-xs-5"></span>
+                    </div>
                 </div>
             </div>
 
